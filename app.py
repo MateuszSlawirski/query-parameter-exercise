@@ -41,11 +41,16 @@ def search():
 
 @app.route("/produkte")
 def search_produkte():
-    wert = request.args.get('kategorie')
-    if wert is None:
+    kategorie = request.args.get('kategorie')
+    preis = request.args.get('preis')
+    if kategorie and preis:
+        return f"Zeige Produkte aus der Kategorie: {kategorie}, mit Preis bis {preis} €"
+    elif kategorie:
+        return f"Zeige Produkte aus der Kategorie: {kategorie}"
+    elif preis:
+        return f"Zeige Produkte mit Preis bis {preis} €"
+    else:
         return "Zeige alle Produkte"
-    return f"Zeige Produkte aus der Kategorie: {wert} "
-    
 
 if __name__ == "__main__":
     app.run(debug=True)
